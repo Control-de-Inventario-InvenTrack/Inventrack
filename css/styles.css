@@ -24,6 +24,10 @@ ul {
     list-style: none;
 }
 
+.acciones button {
+    color: #000;
+}
+
 .container {
     width: 90%;
     margin: auto;
@@ -35,7 +39,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    min-height: 160px;
     padding: 20px 0;
 }
 
@@ -63,3 +67,4 @@ ul {
     flex: 1;
     margin-left: 20px;
 }
+

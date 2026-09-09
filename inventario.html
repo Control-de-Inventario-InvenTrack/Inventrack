@@ -3,10 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <title>Inventario</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <div class="container">
+        <nav class="nav-main">
+            <img src="img/logo.png" alt="Logo de Inventrack" class="nav-logo"
+              width="450" height="350" style="height: 120px; width: auto;">
+            <ul class="nav-menu">
+                <li>
+                    <a href="index.html">Dashboard</a>
+                </li>
+                <li>
+                    <a href="inventario.html">Inventario</a>
+                </li>
+                <li>
+                    <a href="ventas.html">Ventas</a>
+                </li>
+            </ul>
+        </nav>
+        <hr>
+    </div>
     <h2> Inventario de Productos</h2>
     
     <section>
@@ -32,7 +53,59 @@
                 <td>$10.00</td>
                 <td>$8.00</td>
                 <td>Disponible</td>
-                <td>
+                <td class="acciones">
+                    <button>Editar</button>
+                    <button>Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>Producto 02</td>
+                <td>Categoría 02</td>
+                <td>35</td>
+                <td>$15.00</td>
+                <td>$12.00</td>
+                <td>Disponible</td>
+                <td class="acciones">
+                    <button>Editar</button>
+                    <button>Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>Producto 03</td>
+                <td>Categoría 03</td>
+                <td>20</td>
+                <td>$25.00</td>
+                <td>$20.00</td>
+                <td>Disponible</td>
+                <td class="acciones">
+                    <button>Editar</button>
+                    <button>Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>Producto 04</td>
+                <td>Categoría 04</td>
+                <td>10</td>
+                <td>$30.00</td>
+                <td>$24.00</td>
+                <td>Agotándose</td>
+                <td class="acciones">
+                    <button>Editar</button>
+                    <button>Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>005</td>
+                <td>Producto 05</td>
+                <td>Categoría 05</td>
+                <td>0</td>
+                <td>$18.00</td>
+                <td>$14.00</td>
+                <td>Agotado</td>
+                <td class="acciones">
                     <button>Editar</button>
                     <button>Eliminar</button>
                 </td>
@@ -41,6 +114,4 @@
     </section>
        
 </body>
-<a href="ventas.html">Ventas</a>
-<a href="index.html">Dashboard</a>
 </html>
