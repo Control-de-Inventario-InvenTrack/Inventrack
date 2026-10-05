@@ -10,27 +10,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <!-- Personalización de CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <div class="container">
-        <nav class="nav-main">
-            <img src="img/logo.png" alt="Logo de Inventrack"class="nav-logo" 
-              width="450" height="350" style="height: 120px; width: auto;">
-            <ul class="nav-menu">
-                <li>
-                <a href="index.html">Dashboard</a>
-                </li>
-                <li>
-                    <a href="inventario.html">Inventario</a>
-                </li>
-                <li>
-                    <a href="ventas.html">Ventas</a>
-                </li>
+    <aside class="sidebar">
+        <img src="img/logo.png" alt="Logo Inventrack" class="sidebar-logo">
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Dashboard</a></li>
+            <li><a href="inventario.html">Inventario</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+        </ul>
+    </aside>
 
-            </ul>
-            
-        </nav>
-        <hr>
-    </div>
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Resumen General</h1>
+        </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Total de Productos</h3>
+                <div class="value" id="kpi-total-productos">0</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Valor Inventario</h3>
+                <div class="value" id="kpi-valor-inventario">C$0.00</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Ventas Totales</h3>
+                <div class="value" id="kpi-total-ventas">C$0.00</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Stock Crítico</h3>
+                <div class="value" id="kpi-stock-critico">0</div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/analitica.js"></script>
 </body>
 </html>
