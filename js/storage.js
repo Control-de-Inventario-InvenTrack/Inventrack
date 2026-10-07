@@ -3,7 +3,7 @@ const STORAGE_KEYS = {
     VENTAS: 'inventario_ventas'
 };
 
-export const storage = {
+export const Storage = {
     getProductos: () => {
         return JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTOS)) || [];
     },
@@ -16,7 +16,7 @@ export const storage = {
         return JSON.parse(localStorage.getItem(STORAGE_KEYS.VENTAS)) || [];
     },
     
-    guardarVentas: (ventas) => {
+    guardarVenta: (venta) => {
         const ventas = this.getVentas();
         ventas.push(venta);
         localStorage.setItem(STORAGE_KEYS.VENTAS, JSON.stringify(ventas));
