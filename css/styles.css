@@ -13,7 +13,6 @@
   --warning-bg: #fef3c7;
   --danger: #dc2626;
   --danger-bg: #fee2e2;
-  --sidebar-width: 250px;
   --radius: 8px;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
@@ -32,32 +31,36 @@ body {
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   font-size: 14px;
   line-height: 1.5;
+  display: flex;
+  flex-direction: row;
 }
 
 .app-container {
   display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   min-height: 100vh;
 }
 
 .sidebar {
   position: sticky;
   top: 0;
+  z-index: 10;
   display: flex;
-  height: 100vh;
-  flex-direction: column;
+  min-height: 82px;
+  align-items: center;
+  gap: 20px;
+  padding-right: 20px;
   background: var(--primary-dark);
   color: #fff;
-  border-right: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
 }
 
 .brand {
   display: flex;
-  min-height: 82px;
+  flex: 0 0 auto;
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
-  border-bottom: 1px solid #1e293b;
   color: var(--accent-light);
   font-size: 1.2rem;
   font-weight: 700;
@@ -73,7 +76,8 @@ body {
 
 .sidebar nav {
   flex: 1;
-  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .sidebar nav a {
@@ -94,7 +98,7 @@ body {
 }
 
 .sidebar nav a.active {
-  border-left: 4px solid var(--primary-blue);
+  border-bottom: 4px solid var(--primary-blue);
   background: #1e293b;
   color: #fff;
 }
@@ -105,8 +109,8 @@ body {
 }
 
 .sidebar-footer {
-  padding: 15px 20px;
-  border-top: 1px solid #1e293b;
+  flex: 0 0 auto;
+  padding: 15px 0 15px 20px;
   color: #64748b;
   font-size: 0.8rem;
 }
@@ -197,10 +201,12 @@ body {
 
   .sidebar {
     position: relative;
-    height: auto;
+    flex-wrap: wrap;
+    gap: 0;
   }
 
   .brand {
+    width: 100%;
     min-height: 68px;
   }
 
@@ -210,9 +216,9 @@ body {
   }
 
   .sidebar nav {
-    display: flex;
+    flex: 1 1 100%;
     flex-wrap: wrap;
-    margin: 0;
+    justify-content: center;
   }
 
   .sidebar nav a {
