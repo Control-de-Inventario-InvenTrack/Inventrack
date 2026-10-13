@@ -1,24 +1,36 @@
 const STORAGE_KEYS = {
-    PRODUCTOS: 'inventario_productos',
-    VENTAS: 'inventario_ventas'
+  PRODUCTS: 'inventrack_productos_v2',
+  SALES: 'inventrack_ventas_v2'
 };
 
-export const Storage = {
-    getProductos: () => {
-        return JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTOS)) || [];
-    },
+function readCollection(key) {
+  const stored = localStorage.getItem(key);
 
-    guardarProductos: (productos) => {
-        localStorage.setItem(STORAGE_KEYS.PRODUCTOS, JSON.stringify(productos));
-    },
+  if (stored === null) {
+    localStorage.setItem(key, '[]');
+    return [];
+  }
 
-    getVentas: () => {
-        return JSON.parse(localStorage.getItem(STORAGE_KEYS.VENTAS)) || [];
-    },
-    
-    guardarVenta: (venta) => {
-        const ventas = this.getVentas();
-        ventas.push(venta);
-        localStorage.setItem(STORAGE_KEYS.VENTAS, JSON.stringify(ventas));
-    }
-};
+  const collection = JSON.parse(stored);
+  if (!Array.isArray(collection)) {
+    throw new TypeError(`Los datos guardados en "${key}" no tienen un formato válido.`);
+  }
+
+  return collection;
+}
+
+export function getProducts() {
+  return readCollection(STORAGE_KEYS.PRODUCTS);
+}
+
+export function saveProducts(products) {
+  localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+}
+
+export function getSales() {
+  return readCollection(STORAGE_KEYS.SALES);
+}
+
+export function saveSales(sales) {
+  localStorage.setItem(STORAGE_KEYS.SALES, JSON.stringify(sales));
+}

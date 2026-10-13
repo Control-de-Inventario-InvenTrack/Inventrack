@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <title>Ventas</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventas | Inventrack</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
-    <div class="container">
-        <nav class="nav-main">
-            <img src="img/logo.png" alt="Logo de Inventrack" class="nav-logo"
-              width="450" height="350" style="height: 120px; width: auto;">
-            <ul class="nav-menu">
-                <li>
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li>
-                    <a href="inventario.html">Inventario</a>
-                </li>
-                <li>
-                    <a href="ventas.html">Ventas</a>
-                </li>
-            </ul>
-        </nav>
-        <hr>
-<main class="main-content">
+<body class="app-container">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <img src="img/logo.png" alt="" class="brand-logo">
+      <span>Inventrack</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html"><span class="nav-icon">📊</span> Análisis</a>
+      <a href="inventario.html"><span class="nav-icon">📋</span> Inventario</a>
+      <a href="ventas.html" class="active"><span class="nav-icon">🛒</span> Ventas</a>
+    </nav>
+    <div class="sidebar-footer"><small>Control de inventario</small></div>
+  </aside>
 
-    <header class="page-header">
-        <h1>Punto de Venta</h1>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div>
+        <h1>Punto de venta</h1>
+        <p class="subtitle">Registra ventas y descuenta productos del inventario</p>
+      </div>
     </header>
 
-    <div class="form-container">
-
-        <form id="form-venta" class="form-grid">
-
+    <main class="content">
+      <div class="layout-split sales-layout">
+        <section class="card">
+          <div class="card-header"><h2>🛒 Agregar al ticket</h2></div>
+          <div class="card-body">
             <div class="form-group">
-                <label>Producto</label>
-                <select id="select-producto" class="form-control" required>
-                    <option value="">Seleccione un producto...</option>
-                </select>
+              <label for="selectCliente">Cliente / beneficiario</label>
+              <input type="text" id="selectCliente" class="form-control" placeholder="Cliente general">
             </div>
-
             <div class="form-group">
-                <label>Cantidad</label>
-                <input type="number" id="venta-cantidad"
-                       class="form-control" min="1" required>
+              <label for="selectProd">Producto disponible</label>
+              <select id="selectProd" class="form-control"></select>
             </div>
-
-            <div class="form-group" style="justify-content: flex-end;">
-                <button type="submit" class="btn btn-primary">
-                    Completar Venta
-                </button>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cantInput">Cantidad</label>
+                <input type="number" id="cantInput" class="form-control" min="1" step="1" value="1">
+              </div>
+              <div class="form-group">
+                <label for="precioDisp">Precio unitario</label>
+                <input type="text" id="precioDisp" class="form-control" value="C$0.00" readonly>
+              </div>
             </div>
+            <button type="button" id="btnAgregar" class="btn btn-primary btn-full">➕ Añadir al ticket</button>
+            <p class="form-hint" id="ventasAyuda">Registra productos en el inventario para comenzar.</p>
+          </div>
+        </section>
 
-        </form>
+        <section class="card">
+          <div class="card-header flex-between">
+            <h2>📜 Detalle del ticket</h2>
+            <button type="button" id="btnVaciar" class="btn btn-sm btn-secondary">Vaciar ticket</button>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead><tr><th>Producto</th><th>P. unitario</th><th>Cantidad</th><th>Subtotal</th><th>Acción</th></tr></thead>
+                <tbody id="ticketBody"></tbody>
+              </table>
+            </div>
+            <div class="checkout-summary">
+              <div class="summary-row"><span>Subtotal:</span><span id="lblSubtotal">C$0.00</span></div>
+              <div class="summary-row"><span>Impuesto / retención (0%):</span><span>C$0.00</span></div>
+              <div class="summary-row total-row"><span>Total a pagar:</span><span id="lblTotal">C$0.00</span></div>
+              <button type="button" id="btnProcesar" class="btn btn-success btn-lg btn-full">✅ Confirmar venta y descontar stock</button>
+            </div>
+          </div>
+        </section>
+      </div>
 
-    </div>
-
-    <div class="table-container">
-
-        <h2>Historial de Ventas</h2>
-
-        <table class="custom-table">
-
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-
-            <tbody id="tabla-ventas"></tbody>
-
-        </table>
-
-    </div>
-
-</main>
-    </div>
-    <script type="module" src="js/ventas.js"></script>
+      <section class="card style-margin-top">
+        <div class="card-header"><h2>🕒 Historial reciente de ventas</h2></div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>N.º venta</th><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Total</th></tr></thead>
+              <tbody id="tablaHistorial"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="js/ventas.js"></script>
 </body>
 </html>

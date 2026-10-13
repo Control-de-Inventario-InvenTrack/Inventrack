@@ -1,52 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventrack</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <!-- Personalización de CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Inventrack</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <aside class="sidebar">
-        <img src="img/logo.png" alt="Logo Inventrack" class="sidebar-logo">
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Dashboard</a></li>
-            <li><a href="inventario.html">Inventario</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-        </ul>
-    </aside>
+<body class="app-container">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <img src="img/logo.png" alt="" class="brand-logo">
+      <span>Inventrack</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html" class="active"><span class="nav-icon">📊</span> Análisis</a>
+      <a href="inventario.html"><span class="nav-icon">📋</span> Inventario</a>
+      <a href="ventas.html"><span class="nav-icon">🛒</span> Ventas</a>
+    </nav>
+    <div class="sidebar-footer"><small>Control de inventario</small></div>
+  </aside>
 
-    <main class="main-content">
-        <header class="page-header">
-            <h1>Resumen General</h1>
-        </header>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div>
+        <h1>Dashboard y análisis</h1>
+        <p class="subtitle">Resumen general del inventario y las ventas</p>
+      </div>
+      <div class="user-info"><span class="status-dot"></span> Sistema activo · modo local</div>
+    </header>
 
-        <section class="kpi-grid">
-            <div class="kpi-card">
-                <h3>Total de Productos</h3>
-                <div class="value" id="kpi-total-productos">0</div>
+    <main class="content">
+      <section class="kpi-grid" aria-label="Indicadores del negocio">
+        <article class="kpi-card">
+          <div class="kpi-icon blue">📦</div>
+          <div><div class="kpi-title">Total de productos</div><div class="kpi-value" id="kpiTotalProds">0</div><small class="kpi-subtext">Productos registrados</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-icon red">⚠️</div>
+          <div><div class="kpi-title">Stock crítico</div><div class="kpi-value danger-text" id="kpiStockBajo">0</div><small class="kpi-subtext">Requieren reabastecimiento</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-icon green">💰</div>
+          <div><div class="kpi-title">Ventas totales</div><div class="kpi-value success-text" id="kpiTotalVentas">C$0.00</div><small class="kpi-subtext">Ingresos acumulados</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-icon amber">📈</div>
+          <div><div class="kpi-title">Margen estimado</div><div class="kpi-value warning-text" id="kpiMargen">C$0.00</div><small class="kpi-subtext">Precio de venta menos costo</small></div>
+        </article>
+      </section>
+
+      <section class="charts-grid" aria-label="Gráficos de análisis">
+        <article class="card">
+          <div class="card-header"><h2>📊 Productos más vendidos</h2></div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="chartVentas" aria-label="Gráfico de productos más vendidos"></canvas>
+              <p class="empty-state chart-empty" id="chartVentasEmpty" hidden>Aún no hay ventas para mostrar.</p>
             </div>
-            <div class="kpi-card">
-                <h3>Valor Inventario</h3>
-                <div class="value" id="kpi-valor-inventario">C$0.00</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-header"><h2>🏷️ Productos por categoría</h2></div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="chartCategorias" aria-label="Gráfico de productos por categoría"></canvas>
+              <p class="empty-state chart-empty" id="chartCategoriasEmpty" hidden>Aún no hay productos para mostrar.</p>
             </div>
-            <div class="kpi-card">
-                <h3>Ventas Totales</h3>
-                <div class="value" id="kpi-total-ventas">C$0.00</div>
-            </div>
-            <div class="kpi-card">
-                <h3>Stock Crítico</h3>
-                <div class="value" id="kpi-stock-critico">0</div>
-            </div>
-        </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="card style-margin-top">
+        <div class="card-header flex-between">
+          <h2>🚨 Productos que requieren reabastecimiento</h2>
+          <a href="inventario.html" class="btn btn-sm btn-secondary">Ir al inventario</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Mínimo</th><th>Estado</th></tr></thead>
+              <tbody id="tablaUrgentes"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </main>
-
-    <script type="module" src="js/analitica.js"></script>
+  </div>
+  <script type="module" src="js/analitica.js"></script>
 </body>
 </html>

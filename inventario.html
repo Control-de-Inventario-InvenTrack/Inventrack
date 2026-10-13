@@ -1,91 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <title>Inventario</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario | Inventrack</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
-    <div class="container">
-        <nav class="nav-main">
-            <img src="img/logo.png" alt="Logo de Inventrack" class="nav-logo"
-              width="450" height="350" style="height: 120px; width: auto;">
-            <ul class="nav-menu">
-                <li>
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li>
-                    <a href="inventario.html">Inventario</a>
-                </li>
-                <li>
-                    <a href="ventas.html">Ventas</a>
-                </li>
-            </ul>
-        </nav>
-        <hr>
-<main class="main-content">
-    <header class="page-header">
-        <h1>Administración de Productos</h1>
+<body class="app-container">
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <img src="img/logo.png" alt="" class="brand-logo">
+      <span>Inventrack</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html"><span class="nav-icon">📊</span> Análisis</a>
+      <a href="inventario.html" class="active"><span class="nav-icon">📋</span> Inventario</a>
+      <a href="ventas.html"><span class="nav-icon">🛒</span> Ventas</a>
+    </nav>
+    <div class="sidebar-footer"><small>Control de inventario</small></div>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div>
+        <h1>Inventario de productos</h1>
+        <p class="subtitle">Administra productos, existencias y precios</p>
+      </div>
+      <button type="button" class="btn btn-primary" id="btnNuevo">➕ Nuevo producto</button>
     </header>
 
-    <div class="form-container">
-        <form id="form-producto" class="form-grid">
+    <main class="content">
+      <div class="layout-split">
+        <section class="card">
+          <div class="card-header"><h2 id="formTitle">📝 Registro de producto</h2></div>
+          <div class="card-body">
+            <form id="formProducto">
+              <input type="hidden" id="prodId">
+              <div class="form-group">
+                <label for="codigo">Código del producto</label>
+                <input type="text" id="codigo" class="form-control" placeholder="Ej.: INV-001" required>
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre del producto</label>
+                <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" class="form-control" required>
+                  <option value="">Seleccionar categoría</option>
+                  <option value="Insumos">Insumos</option>
+                  <option value="Semillas">Semillas</option>
+                  <option value="Herramientas">Herramientas</option>
+                  <option value="Químicos">Químicos</option>
+                  <option value="Alimento Animal">Alimento animal</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="stock">Stock actual</label>
+                  <input type="number" id="stock" class="form-control" min="0" step="1" required>
+                </div>
+                <div class="form-group">
+                  <label for="stockMinimo">Stock mínimo</label>
+                  <input type="number" id="stockMinimo" class="form-control" min="0" step="1" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="precioCosto">Precio de costo (C$)</label>
+                  <input type="number" id="precioCosto" class="form-control" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                  <label for="precioVenta">Precio de venta (C$)</label>
+                  <input type="number" id="precioVenta" class="form-control" min="0" step="0.01" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="vencimiento">Fecha de vencimiento (opcional)</label>
+                <input type="date" id="vencimiento" class="form-control">
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">💾 Guardar producto</button>
+                <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </section>
 
-            <input type="hidden" id="prod-id">
-
-            <div class="form-group">
-                <label>SKU</label>
-                <input type="text" id="prod-sku" class="form-control" required>
+        <section class="card">
+          <div class="card-header">
+            <h2>📋 Productos registrados</h2>
+            <div class="toolbar-grid">
+              <input type="search" id="buscarInput" class="form-control" placeholder="Buscar por nombre o código" aria-label="Buscar productos">
+              <select id="filtroCategoria" class="form-control" aria-label="Filtrar por categoría">
+                <option value="">Todas las categorías</option>
+                <option value="Insumos">Insumos</option>
+                <option value="Semillas">Semillas</option>
+                <option value="Herramientas">Herramientas</option>
+                <option value="Químicos">Químicos</option>
+                <option value="Alimento Animal">Alimento animal</option>
+                <option value="Otros">Otros</option>
+              </select>
             </div>
-
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="prod-nombre" class="form-control" required>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>P. costo</th><th>P. venta</th><th>Estado</th><th>Acciones</th></tr></thead>
+                <tbody id="tablaProductos"></tbody>
+              </table>
             </div>
-
-            <div class="form-group">
-                <label>Precio ($)</label>
-                <input type="number" id="prod-precio" step="0.01" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label>Stock Initial</label>
-                <input type="number" id="prod-stock" class="form-control" required>
-            </div>
-
-            <div class="form-group" style="justify-content: flex-end;">
-                <button type="submit" class="btn btn-primary" id="btn-guardar">
-                    Guardar Producto
-                </button>
-            </div>
-
-        </form>
-    </div>
-    <div class="table-container">
-        <table class="custom-table">
-
-            <thead>
-                <tr>
-                    <th>SKU</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody id="tabla-productos"></tbody>
-
-        </table>
-    </div>
-</main>
-    </div>
-<script type="module" src="js/inventario.js"></script>
-
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="js/inventario.js"></script>
 </body>
 </html>

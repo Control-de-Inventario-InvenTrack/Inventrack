@@ -1,24 +1,17 @@
-# InvenTrack — Sistema Web de Control de Inventario y Trazabilidad
-> ** Propuesta de creación de pagina web responsiva en la área de Ingenieria Web 1 **
-> Sistema web dinámico orientado a la gestión eficiente y control operativo de inventarios para comercios locales.
+# Inventrack — Sistema de control de inventario y ventas
 
-# Inventrack "solución web diseñada para optimizar la administración de inventarios en pequeñas y medianas empresas".
+Aplicación web responsiva para administrar productos, existencias y ventas. Los datos se guardan en el almacenamiento local del navegador.
 
-# Instalación y uso local
-1. Clonar el repositorio: 
-git clone [https://github.com/Control-de-Inventario-InvenTrack/Inventrack.git]
-2. Entrar al directorio del proyecto
-cd Inventrack
-3. Abrir la aplicación:
-Abre el archivo index.html directamente en tu navegador web preferido o utiliza una extensión de servidor local como Live Server en VS Code.
-### ¿Cómo agregarlo a tu repositorio?
-1. Crear rama de trabajo
-git checkout -b "Nombre_de_rama"
-2. Verificar el estado de los archivos modificados
-git status
-3. Preparar todos los cambios para el commit
-git add .
-4. Registrar los cambios en el historial con un mensaje semántico
-git commit -m "feat: cambios o modificaciones hecha en el proyecto"
-5. Publicar la rama de trabajo en el repositorio remoto
-git push origin Nombre_de_rama
+## Uso local
+
+1. Abre la carpeta del proyecto en VS Code.
+2. Inicia un servidor local, por ejemplo, con la extensión Live Server.
+3. Abre `index.html` desde ese servidor. Se requiere un servidor local porque la aplicación carga módulos JavaScript.
+
+## Áreas del sistema
+
+- **Análisis:** indicadores, gráficos de ventas y categorías, y alertas de stock.
+- **Inventario:** registro, edición, búsqueda, filtrado y eliminación de productos.
+- **Ventas:** carrito, validación de existencias, descuento automático del stock e historial.
+
+La aplicación inicia sin productos ni ventas de ejemplo. Las áreas muestran estados vacíos hasta que se agreguen productos o se registren ventas. Los datos que se ingresen se conservan en el navegador utilizado.
