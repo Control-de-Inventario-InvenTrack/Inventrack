@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - InvenTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/route-guard.js"></script>
+</head>
+<body>
+    <main class="login-card">
+        <img src="img/logo.png" alt="InvenTrack" class="login-logo">
+        <h1>Iniciar sesión</h1>
+        <p class="login-description">Accede al sistema de inventario</p>
+
+        <form id="form-login" class="login-form">
+            <div class="form-group-login">
+                <label for="login-user">Usuario</label>
+                <input type="text" id="login-user" name="username" autocomplete="username" required>
+            </div>
+            <div class="form-group-login">
+                <label for="login-pass">Contraseña</label>
+                <input type="password" id="login-pass" name="password" autocomplete="current-password" required>
+            </div>
+            <p id="login-error" class="form-message error-message" role="alert" hidden></p>
+            <button type="submit" class="btn-login">Ingresar al sistema</button>
+        </form>
+
+        <div class="login-links">
+            <button type="button" id="open-register-modal" class="text-link">Registrarse</button>
+            <button type="button" id="open-reset-modal" class="text-link">¿Olvidaste tu contraseña?</button>
+        </div>
+    </main>
+
+    <div id="modal-register" class="modal-overlay" hidden>
+        <section class="modal-content" role="dialog" aria-modal="true" aria-labelledby="register-title">
+            <h2 id="register-title">Crear cuenta</h2>
+            <p class="modal-description">Registra un usuario para acceder al sistema.</p>
+            <form id="form-register" class="login-form">
+                <div class="form-group-login">
+                    <label for="register-user">Usuario</label>
+                    <input type="text" id="register-user" autocomplete="username" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="register-email">Correo electrónico</label>
+                    <input type="email" id="register-email" autocomplete="email" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="register-pass">Contraseña</label>
+                    <input type="password" id="register-pass" autocomplete="new-password" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="register-confirm-pass">Confirmar contraseña</label>
+                    <input type="password" id="register-confirm-pass" autocomplete="new-password" required>
+                </div>
+                <p class="password-hint">Debe incluir una mayúscula, un número y un carácter especial.</p>
+                <p id="register-msg" class="form-message" role="status" hidden></p>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn-login">Registrarse</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <div id="modal-reset" class="modal-overlay" hidden>
+        <section class="modal-content" role="dialog" aria-modal="true" aria-labelledby="reset-title">
+            <h2 id="reset-title">Restablecer contraseña</h2>
+            <p class="modal-description">Identifica tu cuenta con el usuario o correo registrado.</p>
+            <form id="form-reset" class="login-form">
+                <div class="form-group-login">
+                    <label for="reset-user">Usuario o correo electrónico</label>
+                    <input type="text" id="reset-user" autocomplete="username" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="reset-new-pass">Nueva contraseña</label>
+                    <input type="password" id="reset-new-pass" autocomplete="new-password" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="reset-confirm-pass">Confirmar nueva contraseña</label>
+                    <input type="password" id="reset-confirm-pass" autocomplete="new-password" required>
+                </div>
+                <p class="password-hint">Debe incluir una mayúscula, un número y un carácter especial.</p>
+                <p id="reset-msg" class="form-message" role="status" hidden></p>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn-login">Guardar contraseña</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script type="module" src="js/login.js"></script>
+</body>
+</html>

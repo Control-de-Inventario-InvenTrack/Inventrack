@@ -103,6 +103,15 @@ body {
   color: #fff;
 }
 
+.sidebar nav a.logout-link {
+  color: #f87171;
+}
+
+.sidebar nav a.logout-link:hover {
+  background: #7f1d1d;
+  color: #fff;
+}
+
 .nav-icon {
   width: 22px;
   text-align: center;
